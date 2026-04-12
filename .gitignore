@@ -1,0 +1,44 @@
+# source class folders
+/Phase1/
+/Phase2/
+/Programming Assignment pong/
+
+# Compiled outputs
+*.o
+*.gch
+a.out
+
+# Named executables (Linux, no extension)
+pong
+sttyl
+watch
+pipex
+
+# Windows executables
+*.exe
+
+# Generated directories
+tmp/
+output/
+tools/
+
+# Editor junk
+*~
+.DS_Store
+*.swp
+Thumbs.db
+
+# Screenshots
+*.png
+
+# Submission artifacts
+*.docx
+RobareBrandon-*.txt
+Submission-Checklist.txt
+Programming_Assignment_template.txt
+
+# Course PDFs 
+pong-Instructions.pdf
+Project-Instructions.pdf
+rfcNP.pdf
+Grading Standards-Programming Assignments.pdf
