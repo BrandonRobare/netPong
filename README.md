@@ -1,13 +1,19 @@
-# Pong — Original Baseline
+# netPong — CS4-53203 Systems Programming
 
 Course: CS4-53203 Systems Programming  
 Program: `pong.c`, `paddle.c`, `paddle.h`
 
 ## Overview
 
-This project is the original one-player terminal Pong assignment implemented with `curses`, `SIGALRM`, and interval timers.
+This repository tracks the evolution of the original one-player terminal Pong assignment into **netPong**, a multiplayer networking project built in phases for Systems Programming.
 
-Implemented features:
+The root codebase stays as a single evolving implementation, while Git tags mark the major milestones:
+
+- `v0.1-original-pong` — original one-player Pong baseline
+- `v0.2-phase1-analysis` — Phase 1 architecture, RFC mapping, and design documentation
+- `phase2` branch — active networking implementation work
+
+## Baseline Features
 
 - Three-sided visible court with corners at `(4,70)`, `(4,9)`, `(21,9)`, `(21,70)`
 - Six-row paddle (`#`) at column `70`, controlled by `k` and `j`
@@ -18,6 +24,12 @@ Implemented features:
 - `bounce_or_lose()` returns `0` for no event, `1` for bounce, and `-1` for lose
 - Missed balls decrement the remaining-ball counter and trigger a new serve until three balls are used
 - `Q` quits the game
+
+## Project Layout
+
+- `pong.c`, `paddle.c`, `paddle.h` — active source tree
+- `docs/phase1/` — Phase 1 analysis materials tracked in Git
+- `Phase1/`, `Phase2/`, `Programming Assignment pong/` — local source/reference folders kept outside the tracked milestone history
 
 ## Build
 
@@ -31,8 +43,6 @@ make
 ./pong
 ```
 
-## Controls
+## Next Step
 
-- `k` move paddle up
-- `j` move paddle down
-- `Q` quit
+Phase 2 extends this baseline with BSD sockets and multiplayer game-state handoff based on the Phase 1 RFC analysis.
