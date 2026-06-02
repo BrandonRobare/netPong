@@ -2,7 +2,6 @@
 
 #include "paddle.h"
 
-#define PADDLE_COL 70
 #define PADDLE_TOP_LIMIT 5
 #define PADDLE_BOTTOM_LIMIT 20
 #define PADDLE_HEIGHT 6
@@ -27,9 +26,9 @@ static void draw_paddle(void)
     }
 }
 
-void paddle_init(void)
+void paddle_init(int col)
 {
-    the_pad.pad_col = PADDLE_COL;
+    the_pad.pad_col = col;
     the_pad.pad_char = PADDLE_CHAR;
     the_pad.pad_top = 10;
     the_pad.pad_bot = the_pad.pad_top + (PADDLE_HEIGHT - 1);
