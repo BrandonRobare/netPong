@@ -15,10 +15,11 @@ I built this in three phases. Phase 1 was analysis of the single-player baseline
 
 I keep one source tree at the repo root and use Git tags to mark milestones:
 
-- `v0.1-original-pong` — the original single-player Pong baseline
-- `v0.2-phase1-analysis` — Phase 1 architecture, RFC mapping, and design documentation
-- `v0.3-phase2-design` — Phase 2 protocol and state-machine design
-- `v1.0-phase3-netpong` — the finished two-player networked game
+- `v0.1-original-pong`: the original single-player Pong baseline
+- `v0.2-phase1-analysis`: Phase 1 architecture, RFC mapping, and design documentation
+- `v1.0-phase3-netpong`: the finished two-player networked game
+
+The Phase 2 protocol and state-machine design lives in `docs/phase2/`.
 
 ## Architecture
 
@@ -86,7 +87,7 @@ stateDiagram-v2
     FINISHED --> [*]
 ```
 
-For the rationale behind these choices, see the [Architecture](../../wiki/Architecture) wiki page.
+For the rationale behind these choices, see the [Architecture](https://github.com/BrandonRobare/netPong/wiki/Architecture) wiki page.
 
 ## Network Protocol
 
@@ -100,7 +101,7 @@ BALL net_position xttm yttm ydir [PPBchar]
 
 `net_position` is the ball's row relative to the top of the net, `xttm`/`yttm` are the horizontal and vertical time-to-move counters that set its speed, and `ydir` is its vertical direction. The receiving side rebuilds a local ball from those fields, drops it in at its own net edge, and switches to `PLAY`. Paddles never travel over the socket; each side draws only its own paddle. Scores stay in sync because a `MISS` deterministically moves the point and the next serve to the other player.
 
-The full packet layout and sync strategy are on the [Network Protocol](../../wiki/Network-Protocol) wiki page.
+The full packet layout and sync strategy are on the [Network Protocol](https://github.com/BrandonRobare/netPong/wiki/Network-Protocol) wiki page.
 
 ## Getting Started
 
@@ -137,23 +138,23 @@ Both windows come up as soon as the TCP connection is established. The client se
 
 ### Keys
 
-- `k` — move your paddle up
-- `j` — move your paddle down
-- `Q` — quit and tell the opponent
+- `k`: move your paddle up
+- `j`: move your paddle down
+- `Q`: quit and tell the opponent
 
 Keyboard input is active while the ball is on your court. While you wait for the ball to come back, the local keyboard is idle (see the Limitations note in the Phase 3 report).
 
 ## Project Structure
 
-- `pong.c` — main loop, game state machine, ball physics, court drawing
-- `paddle.c`, `paddle.h` — the paddle module: `paddle_init`, `paddle_up`, `paddle_down`, `paddle_contact`
-- `net.c`, `net.h` — BSD socket setup: server bind/listen/accept and client connect
-- `protocol.c`, `protocol.h` — the SPPBTP wire format: sender helpers and `recv_msg`
-- `court.h` — `struct court` and `configure_side`, which set per-side geometry so one engine renders either court
-- `Makefile` — builds the `pong` binary
-- `docs/original/` — notes for the single-player baseline
-- `docs/phase1/`, `docs/phase2/`, `docs/phase3/` — the report from each development phase
-- `.github/workflows/ci.yml` — builds the binary on Ubuntu with ncurses installed
+- `pong.c`: main loop, game state machine, ball physics, court drawing
+- `paddle.c`, `paddle.h`: the paddle module: `paddle_init`, `paddle_up`, `paddle_down`, `paddle_contact`
+- `net.c`, `net.h`: BSD socket setup: server bind/listen/accept and client connect
+- `protocol.c`, `protocol.h`: the SPPBTP wire format: sender helpers and `recv_msg`
+- `court.h`: `struct court` and `configure_side`, which set per-side geometry so one engine renders either court
+- `Makefile`: builds the `pong` binary
+- `docs/original/`: notes for the single-player baseline
+- `docs/phase1/`, `docs/phase2/`, `docs/phase3/`: the report from each development phase
+- `.github/workflows/ci.yml`: builds the binary on Ubuntu with ncurses installed
 
 I kept the class handouts, submission files, and scratch folders out of the tracked repo, so the public project holds only source and documentation that I wrote.
 
@@ -165,14 +166,14 @@ The project meets the assignment requirements. A few items from the RFC are docu
 - A server that returns to waiting after a game ends, instead of one game per launch.
 - A `?ERR` recovery path that resynchronizes instead of closing the connection.
 
-See the [Roadmap](../../wiki/Roadmap) wiki page for more.
+See the [Roadmap](https://github.com/BrandonRobare/netPong/wiki/Roadmap) wiki page for more.
 
 ## Author & Acknowledgments
 
 Brandon Robare.
 
-The single-player Pong assignment that this builds on was provided as the course baseline by the CS4-53203 instructor. The networking work — the socket layer, the SPPBTP protocol implementation, the play/wait state machine, and the per-side court refactor — is mine. The protocol follows the SPPBTP RFC handed out for the assignment.
+The single-player Pong assignment that this builds on was provided as the course baseline by the CS4-53203 instructor. The networking is mine: the socket layer, the SPPBTP protocol implementation, the play/wait state machine, and the per-side court refactor. The protocol follows the SPPBTP RFC handed out for the assignment.
 
 ## License
 
-Released under the MIT License. See [LICENSE](LICENSE) and the [License](../../wiki/Home#license) note on the Wiki.
+Released under the MIT License. See [LICENSE](LICENSE) and the [License](https://github.com/BrandonRobare/netPong/wiki/Home#license) note on the Wiki.
